@@ -1,0 +1,1802 @@
+<button class="btn btn-primary btn-sm" onclick="editMember('198801152020121005')">✏️</button>
+                                            <button class="btn btn-danger btn-sm" onclick="deleteMember('198801152020121005')">🗑️</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add Member Section -->
+            <section id="add-member-section" class="content-section" style="display: none;">
+                <div class="content-card">
+                    <h3 class="card-title">➕ Tambah Anggota Baru - Cabang Riau</h3>
+                    
+                    <div class="branch-notice">
+                        <span>ℹ️</span>
+                        <span>Anggota baru akan otomatis terdaftar di <strong>Cabang Riau</strong></span>
+                    </div>
+
+                    <form id="addMemberForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Gelar Depan</label>
+                                <input type="text" class="form-control" placeholder="dr." name="gelarDepan">
+                            </div>
+                            <div class="form-group">
+                                <label>Nama Lengkap *</label>
+                                <input type="text" class="form-control" required name="namaLengkap" placeholder="Nama lengkap tanpa gelar">
+                            </div>
+                            <div class="form-group">
+                                <label>Gelar Belakang</label>
+                                <input type="text" class="form-control" placeholder="Sp.P" name="gelarBelakang">
+                            </div>
+                            <div class="form-group">
+                                <label>Jenis Kelamin *</label>
+                                <select class="form-control" required name="jenisKelamin">
+                                    <option value="">Pilih Jenis Kelamin</option>
+                                    <option value="L">Laki-laki</option>
+                                    <option value="P">Perempuan</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tempat Lahir *</label>
+                                <input type="text" class="form-control" required name="tempatLahir" placeholder="Kota kelahiran">
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Lahir *</label>
+                                <input type="date" class="form-control" required name="tanggalLahir">
+                            </div>
+                            <div class="form-group">
+                                <label>Agama</label>
+                                <select class="form-control" name="agama">
+                                    <option value="">Pilih Agama</option>
+                                    <option value="Islam">Islam</option>
+                                    <option value="Kristen">Kristen</option>
+                                    <option value="Katolik">Katolik</option>
+                                    <option value="Hindu">Hindu</option>
+                                    <option value="Buddha">Buddha</option>
+                                    <option value="Konghucu">Konghucu</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Status Perkawinan</label>
+                                <select class="form-control" name="statusKawin">
+                                    <option value="">Pilih Status</option>
+                                    <option value="Belum Menikah">Belum Menikah</option>
+                                    <option value="Menikah">Menikah</option>
+                                    <option value="Cerai">Cerai</option>
+                                    <option value="Janda/Duda">Janda/Duda</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Email *</label>
+                                <input type="email" class="form-control" required name="email" placeholder="email@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>No. HP *</label>
+                                <input type="tel" class="form-control" required name="noHP" placeholder="08xxxxxxxxxx">
+                            </div>
+                            <div class="form-group">
+                                <label>Alumni *</label>
+                                <select class="form-control" required name="alumni">
+                                    <option value="">Pilih Alumni</option>
+                                    <option value="FK USK">FK USK</option>
+                                    <option value="FK USU">FK USU</option>
+                                    <option value="FK UNRI">FK UNRI</option>
+                                    <option value="FK UNILA">FK UNILA</option>
+                                    <option value="FK UI">FK UI</option>
+                                    <option value="FK UIN">FK UIN</option>
+                                    <option value="FK UNS">FK UNS</option>
+                                    <option value="FK UA">FK UA</option>
+                                    <option value="FK UB">FK UB</option>
+                                    <option value="FK UNUD">FK UNUD</option>
+                                    <option value="FK UNRAM">FK UNRAM</option>
+                                    <option value="FK UML">FK UML</option>
+                                    <option value="FK UNMUL">FK UNMUL</option>
+                                    <option value="FK UNHAS">FK UNHAS</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Status Anggota *</label>
+                                <select class="form-control" required name="statusAnggota">
+                                    <option value="">Pilih Status</option>
+                                    <option value="Biasa">Biasa</option>
+                                    <option value="Muda">Muda</option>
+                                    <option value="Luar Biasa">Luar Biasa</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h4 style="color: #1b5e20; margin: 2rem 0 1rem 0;">📍 Alamat Rumah</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Alamat Lengkap *</label>
+                                <textarea class="form-control" required name="alamat" rows="3" placeholder="Alamat lengkap"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Kota/Kabupaten *</label>
+                                <input type="text" class="form-control" required name="kota" placeholder="Kota/Kabupaten">
+                            </div>
+                            <div class="form-group">
+                                <label>Provinsi</label>
+                                <input type="text" class="form-control" value="Riau" readonly name="provinsi">
+                            </div>
+                        </div>
+
+                        <h4 style="color: #1b5e20; margin: 2rem 0 1rem 0;">🏥 Tempat Praktik</h4>
+                        <div id="workplaceContainer">
+                            <div class="workplace-group" style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <h5 style="color: #1b5e20; margin-bottom: 1rem;">Tempat Praktik 1</h5>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Nama RS/Klinik</label>
+                                        <input type="text" class="form-control" name="namaRS1" placeholder="Nama rumah sakit/klinik">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Kota/Kabupaten</label>
+                                        <input type="text" class="form-control" name="kotaRS1" placeholder="Kota/Kabupaten">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Provinsi</label>
+                                        <input type="text" class="form-control" name="provinsiRS1" placeholder="Provinsi">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary">💾 Simpan Anggota</button>
+                            <button type="button" class="btn btn-secondary" onclick="resetForm()">🔄 Reset Form</button>
+                            <button type="button" class="btn btn-secondary" onclick="addWorkplace()">➕ Tambah Tempat Praktik</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports-section" class="content-section" style="display: none;">
+                <div class="content-card">
+                    <h3 class="card-title">📈 Laporan Cabang Riau</h3>
+                    
+                    <div class="branch-notice">
+                        <span>ℹ️</span>
+                        <span>Laporan hanya menampilkan data untuk <strong>Cabang Riau</strong></span>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Jenis Laporan</label>
+                            <select class="form-control" id="reportType">
+                                <option value="member-summary">Ringkasan Anggota Cabang</option>
+                                <option value="new-members">Anggota Baru</option>
+                                <option value="member-status">Status Keanggotaan</option>
+                                <option value="workplace-distribution">Sebaran Tempat Kerja</option>
+                                <option value="member-activity">Aktivitas Anggota</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Periode</label>
+                            <select class="form-control" id="reportPeriod">
+                                <option value="current-month">Bulan Ini</option>
+                                <option value="last-month">Bulan Lalu</option>
+                                <option value="current-quarter">Triwulan Ini</option>
+                                <option value="current-year">Tahun Ini</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" onclick="generateBranchReport()">📊 Generate Laporan</button>
+                        <button class="btn btn-secondary" onclick="exportBranchReport()">📥 Export Excel</button>
+                        <button class="btn btn-secondary" onclick="printReport()">🖨️ Print</button>
+                    </div>
+
+                    <div id="reportResults" style="display: none; margin-top: 2rem;">
+                        <h4>Hasil Laporan - Cabang Riau</h4>
+                        <div class="data-table">
+                            <table id="reportTable">
+                                <thead>
+                                    <tr>
+                                        <th>Metric</th>
+                                        <th>Jumlah</th>
+                                        <th>Persentase</th>
+                                        <th>Perubahan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Total Anggota</td>
+                                        <td>123</td>
+                                        <td>100%</td>
+                                        <td style="color: #4caf50;">+3 (+2.5%)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Anggota Aktif</td>
+                                        <td>118</td>
+                                        <td>95.9%</td>
+                                        <td style="color: #4caf50;">+2 (+1.7%)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Anggota Non-Aktif</td>
+                                        <td>5</td>
+                                        <td>4.1%</td>
+                                        <td style="color: #f44336;">+1 (+25%)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Anggota Baru (Bulan Ini)</td>
+                                        <td>3</td>
+                                        <td>2.4%</td>
+                                        <td style="color: #4caf50;">+1 (+50%)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Events Section -->
+            <section id="events-section" class="content-section" style="display: none;">
+                <div class="content-card">
+                    <h3 class="card-title">📅 Kegiatan Cabang Riau</h3>
+                    
+                    <div class="quick-actions">
+                        <div class="quick-action-card" onclick="addEvent()">
+                            <div class="quick-action-icon">📅</div>
+                            <div class="quick-action-title">Buat Kegiatan Baru</div>
+                            <div class="quick-action-desc">Tambahkan kegiatan cabang</div>
+                        </div>
+                        <div class="quick-action-card" onclick="viewEvents()">
+                            <div class="quick-action-icon">📋</div>
+                            <div class="quick-action-title">Daftar Kegiatan</div>
+                            <div class="quick-action-desc">Lihat semua kegiatan cabang</div>
+                        </div>
+                        <div class="quick-action-card" onclick="manageAttendance()">
+                            <div class="quick-action-icon">✓</div>
+                            <div class="quick-action-title">Absensi Kegiatan</div>
+                            <div class="quick-action-desc">Kelola absensi anggota</div>
+                        </div>
+                    </div>
+
+                    <h4 style="color: #1b5e20; margin: 2rem 0 1rem 0;">📅 Kegiatan Mendatang</h4>
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tanggal</th>
+                                    <th>Nama Kegiatan</th>
+                                    <th>Lokasi</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>15 Des 2024</td>
+                                    <td>Seminar Pneumonia</td>
+                                    <td>RSUD Arifin Achmad</td>
+                                    <td><span class="status-badge status-aktif">Aktif</span></td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm">✏️ Edit</button>
+                                        <button class="btn btn-secondary btn-sm">👥 Peserta</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>20 Des 2024</td>
+                                    <td>Workshop COPD</td>
+                                    <td>Hotel Pangeran</td>
+                                    <td><span class="status-badge status-aktif">Aktif</span></td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm">✏️ Edit</button>
+                                        <button class="btn btn-secondary btn-sm">👥 Peserta</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile-section" class="content-section" style="display: none;">
+                <div class="content-card">
+                    <h3 class="card-title">👤 Profil Admin Cabang</h3>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" class="form-control" value="admin_riau" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Lengkap</label>
+                            <input type="text" class="form-control" value="Dr. Admin Riau" id="adminFullName">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" value="admin.riau@pdpi.org" id="adminEmail">
+                        </div>
+                        <div class="form-group">
+                            <label>No. HP</label>
+                            <input type="tel" class="form-control" value="081234567890" id="adminPhone">
+                        </div>
+                        <div class="form-group">
+                            <label>Cabang</label>
+                            <input type="text" class="form-control" value="Cabang Riau" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Role</label>
+                            <input type="text" class="form-control" value="Branch Admin" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Password Baru</label>
+                            <input type="password" class="form-control" placeholder="Kosongkan jika tidak ingin mengubah" id="newPassword">
+                        </div>
+                        <div class="form-group">
+                            <label>Konfirmasi Password</label>
+                            <input type="password" class="form-control" placeholder="Konfirmasi password baru" id="confirmPassword">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" onclick="updateProfile()">💾 Update Profil</button>
+                        <button class="btn btn-secondary" onclick="resetProfile()">🔄 Reset</button>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                        <h4 style="color: #1b5e20; margin-bottom: 1rem;">🔐 Hak Akses Branch Admin</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                            <div>✅ Kelola anggota cabang sendiri</div>
+                            <div>✅ Tambah anggota baru</div>
+                            <div>✅ Edit data anggota cabang</div>
+                            <div>✅ Generate laporan cabang</div>
+                            <div>✅ Export data anggota cabang</div>
+                            <div>✅ Kelola kegiatan cabang</div>
+                            <div>❌ Kelola anggota cabang lain</div>
+                            <div>❌ Kelola admin cabang lain</div>
+                            <div>❌ Akses pengaturan sistem</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Global Variables
+        let currentBranch = 'riau';
+        let workplaceCount = 1;
+        let branchMembers = [
+            {
+                id: '198205062014121003',
+                name: 'dr. ADI SATRIYO, Sp.P',
+                status: 'aktif',
+                joinDate: '15 Jan 2015',
+                gender: 'L'
+            },
+            {
+                id: '197004221994032002',
+                name: 'dr. SITI AMINAH, Sp.P',
+                status: 'aktif',
+                joinDate: '20 Mar 2018',
+                gender: 'P'
+            },
+            {
+                id: '198801152020121005',
+                name: 'dr. BUDI SANTOSO, Sp.P',
+                status: 'aktif',
+                joinDate: '01 Dec 2024',
+                gender: 'L'
+            }
+        ];
+
+        // Initialize Dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeBranchAdmin();
+            setupEventListeners();
+            updateStatistics();
+        });
+
+        function initializeBranchAdmin() {
+            // Get branch from URL parameter or default to 'riau'
+            const urlParams = new URLSearchParams(window.location.search);
+            currentBranch = urlParams.get('branch') || 'riau';
+            
+            // Update UI with branch info
+            const branchName = currentBranch.charAt(0).toUpperCase() + currentBranch.slice(1);
+            document.getElementById('adminName').textContent = `Dr. Admin ${branchName}`;
+            document.getElementById('adminBranch').textContent = `Cabang ${branchName}`;
+            document.getElementById('currentBranch').textContent = `Cabang ${branchName}`;
+            document.getElementById('branchNotice').textContent = `Cabang ${branchName}`;
+            
+            // Update page titles
+            document.querySelectorAll('#pageTitle').forEach(title => {
+                if (title.textContent.includes('Cabang')) {
+                    title.textContent = title.textContent.replace('Cabang Riau', `Cabang ${branchName}`);
+                }
+            });
+        }
+
+        function setupEventListeners() {
+            // Navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (this.dataset.section) {
+                        e.preventDefault();
+                        showSection(this.dataset.section);
+                        
+                        // Update active nav
+                        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            // Form submission
+            document.getElementById('addMemberForm').addEventListener('submit', handleAddMember);
+
+            // Search functionality
+            document.getElementById('memberSearch')?.addEventListener('input', filterMembers);
+        }
+
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show selected section
+            const targetSection = document.getElementById(`${sectionName}-section`);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+            }
+
+            // Update page title
+            const titles = {
+                'dashboard': 'Dashboard Admin Cabang',
+                'members': `Anggota Cabang ${currentBranch.charAt(0).toUpperCase() + currentBranch.slice(1)}`,
+                'add-member': 'Tambah Anggota Baru',
+                'reports': 'Laporan Cabang',
+                'events': 'Kegiatan Cabang',
+                'profile': 'Profil Admin'
+            };
+            document.getElementById('pageTitle').textContent = titles[sectionName] || 'Dashboard Admin Cabang';
+        }
+
+        function updateStatistics() {
+            // Update statistics with branch-specific data
+            animateCounter('totalBranchMembers', branchMembers.length);
+            animateCounter('activeBranchMembers', branchMembers.filter(m => m.status === 'aktif').length);
+            animateCounter('newMembersThisMonth', 3);
+            animateCounter('pendingApplications', 2);
+        }
+
+        function animateCounter(elementId, targetValue) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            const startValue = 0;
+            const duration = 1500;
+            const increment = targetValue / (duration / 16);
+            let currentValue = startValue;
+
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= targetValue) {
+                    element.textContent = targetValue.toLocaleString('id-ID');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(currentValue).toLocaleString('id-ID');
+                }
+            }, 16);
+        }
+
+        // Member Management Functions
+        function handleAddMember(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const memberData = {};
+            
+            for (let [key, value] of formData.entries()) {
+                memberData[key] = value;
+            }
+            
+            // Validate required fields
+            if (!memberData.namaLengkap || !memberData.jenisKelamin || !memberData.email) {
+                showNotification('Mohon lengkapi semua field yang wajib diisi!', 'error');
+                return;
+            }
+            
+            // Generate NPA (in real app, this would be done by server)
+            const npa = generateNPA();
+            
+            // Add to branch members
+            const newMember = {
+                id: npa,
+                name: `${memberData.gelarDepan || ''} ${memberData.namaLengkap} ${memberData.gelarBelakang || ''}`.trim(),
+                status: 'aktif',
+                joinDate: new Date().toLocaleDateString('id-ID'),
+                gender: memberData.jenisKelamin
+            };
+            
+            branchMembers.push(newMember);
+            
+            showNotification('Anggota berhasil ditambahkan!', 'success');
+            
+            // Reset form and redirect to members list
+            setTimeout(() => {
+                e.target.reset();
+                updateStatistics();
+                updateMembersTable();
+                showSection('members');
+            }, 1000);
+        }
+
+        function generateNPA() {
+            // Simple NPA generation (in real app, this would be more sophisticated)
+            const year = new Date().getFullYear();
+            const month = String(new Date().getMonth() + 1).padStart(2, '0');
+            const random = Math.floor(Math.random() * 9999).toString().padStart(4, '0');
+            return `${year}${month}${random}${Math.floor(Math.random() * 999)}`;
+        }
+
+        function addWorkplace() {
+            workplaceCount++;
+            const container = document.getElementById('workplaceContainer');
+            const newWorkplace = document.createElement('div');
+            newWorkplace.className = 'workplace-group';
+            newWorkplace.style.cssText = 'border: 1px solid #ddd; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;';
+            
+            newWorkplace.innerHTML = `
+                <h5 style="color: #1b5e20; margin-bottom: 1rem;">
+                    Tempat Praktik ${workplaceCount}
+                    <button type="button" onclick="removeWorkplace(this)" style="float: right; background: #f44336; color: white; border: none; border-radius: 5px; padding: 0.2rem 0.5rem; cursor: pointer;">❌</button>
+                </h5>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nama RS/Klinik</label>
+                        <input type="text" class="form-control" name="namaRS${workplaceCount}" placeholder="Nama rumah sakit/klinik">
+                    </div>
+                    <div class="form-group">
+                        <label>Kota/Kabupaten</label>
+                        <input type="text" class="form-control" name="kotaRS${workplaceCount}" placeholder="Kota/Kabupaten">
+                    </div>
+                    <div class="form-group">
+                        <label>Provinsi</label>
+                        <input type="text" class="form-control" name="provinsiRS${workplaceCount}" placeholder="Provinsi">
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(newWorkplace);
+        }
+
+        function removeWorkplace(button) {
+            button.closest('.workplace-group').remove();
+        }
+
+        function resetForm() {
+            document.getElementById('addMemberForm').reset();
+            
+            // Reset workplace container to only first workplace
+            const container = document.getElementById('workplaceContainer');
+            const workplaces = container.querySelectorAll('.workplace-group');
+            for (let i = 1; i < workplaces.length; i++) {
+                workplaces[i].remove();
+            }
+            workplaceCount = 1;
+        }
+
+        function updateMembersTable() {
+            const tableBody = document.getElementById('membersTable');
+            tableBody.innerHTML = '';
+            
+            branchMembers.forEach((member, index) => {
+                const row = document.createElement('tr');
+                row.className = 'member-row';
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${member.id}</td>
+                    <td>${member.name}</td>
+                    <td><span class="status-badge status-${member.status}">${member.status}</span></td>
+                    <td>${member.joinDate}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary btn-sm" onclick="viewMember('${member.id}')">👁️</button>
+                            <button class="btn btn-primary btn-sm" onclick="editMember('${member.id}')">✏️</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteMember('${member.id}')">🗑️</button>
+                        </div>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function filterMembers() {
+            const searchTerm = document.getElementById('memberSearch').value.toLowerCase();
+            const rows = document.querySelectorAll('#membersTable .member-row');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        }
+
+        // Member Actions
+        function viewMember(id) {
+            showNotification(`Menampilkan detail anggota: ${id}`, 'success');
+            // In real app, this would show member detail modal
+        }
+
+        function editMember(id) {
+            showNotification(`Edit anggota: ${id}`, 'success');
+            // In real app, this would open edit modal
+        }
+
+        function deleteMember(id) {
+            if (confirm(`Apakah Anda yakin ingin menghapus anggota ${id}?`)) {
+                // Remove from array
+                const index = branchMembers.findIndex(m => m.id === id);
+                if (index > -1) {
+                    branchMembers.splice(index, 1);
+                    updateMembersTable();
+                    updateStatistics();
+                    showNotification('Anggota berhasil dihapus!', 'success');
+                }
+            }
+        }
+
+        // Report Functions
+        function generateBranchReport() {
+            const reportType = document.getElementById('reportType').value;
+            const reportPeriod = document.getElementById('reportPeriod').value;
+            
+            showNotification('Generating laporan cabang...', 'success');
+            
+            // Simulate report generation
+            setTimeout(() => {
+                document.getElementById('reportResults').style.display = 'block';
+                showNotification('Laporan cabang berhasil dibuat!', 'success');
+            }, 2000);
+        }
+
+        function exportBranchReport() {
+            showNotification('Exporting laporan cabang ke Excel...', 'success');
+            
+            // Simulate export
+            setTimeout(() => {
+                showNotification('File Excel laporan cabang berhasil diunduh!', 'success');
+            }, 1500);
+        }
+
+        function exportMembers() {
+            showNotification('Exporting data anggota cabang ke Excel...', 'success');
+            
+            // Simulate export
+            setTimeout(() => {
+                showNotification('File Excel data anggota berhasil diunduh!', 'success');
+            }, 1500);
+        }
+
+        function printReport() {
+            showNotification('Mempersiapkan dokumen untuk print...', 'success');
+            
+            // Simulate print
+            setTimeout(() => {
+                window.print();
+            }, 1000);
+        }
+
+        // Event Management Functions
+        function addEvent() {
+            showNotification('Fitur tambah kegiatan akan segera tersedia!', 'warning');
+        }
+
+        function viewEvents() {
+            showNotification('Menampilkan daftar kegiatan cabang...', 'success');
+        }
+
+        function manageAttendance() {
+            showNotification('Fitur kelola absensi akan segera tersedia!', 'warning');
+        }
+
+        // Profile Management
+        function updateProfile() {
+            const fullName = document.getElementById('adminFullName').value;
+            const email = document.getElementById('adminEmail').value;
+            const phone = document.getElementById('adminPhone').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Basic validation
+            if (!fullName || !email) {
+                showNotification('Nama dan email harus diisi!', 'error');
+                return;
+            }
+
+            if (newPassword && newPassword !== confirmPassword) {
+                showNotification('Konfirmasi password tidak sesuai!', 'error');
+                return;
+            }
+
+            // Update profile (in real app, this would send to server)
+            document.getElementById('adminName').textContent = fullName;
+            
+            showNotification('Profil berhasil diperbarui!', 'success');
+            
+            // Clear password fields
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+
+        function resetProfile() {
+            // Reset form to original values
+            document.getElementById('adminFullName').value = 'Dr. Admin Riau';
+            document.getElementById('adminEmail').value = 'admin.riau@pdpi.org';
+            document.getElementById('adminPhone').value = '081234567890';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+            
+            showNotification('Form profil direset!', 'success');
+        }
+
+        // Utility Functions
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                showNotification('Logging out...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'index.html'; // Redirect to homepage
+                }, 1000);
+            }
+        }
+
+        // Simulate real-time updates for branch dashboard
+        setInterval(() => {
+            // Randomly update some statistics
+            const currentActive = parseInt(document.getElementById('activeBranchMembers').textContent);
+            const currentPending = parseInt(document.getElementById('pendingApplications').textContent);
+            
+            // Small random changes to simulate activity
+            if (Math.random() > 0.8) {
+                // Occasionally update pending applications
+                const newPending = Math.max(0, currentPending + (Math.random() > 0.5 ? 1 : -1));
+                document.getElementById('pendingApplications').textContent = newPending;
+                
+                // Add activity log entry
+                addActivityEntry();
+            }
+        }, 30000); // Update every 30 seconds
+
+        function addActivityEntry() {
+            const activities = [
+                'Data anggota diperbarui',
+                'Anggota baru mendaftar',
+                'Laporan dibuat',
+                'Kegiatan cabang ditambahkan',
+                'Profile anggota diverifikasi'
+            ];
+            
+            const activityContainer = document.getElementById('recentActivity');
+            const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+            
+            const newActivity = document.createElement('div');
+            newActivity.className = 'activity-item';
+            newActivity.innerHTML = `
+                <div class="activity-icon">📝</div>
+                <div class="activity-content">
+                    <div class="activity-title">${randomActivity}</div>
+                    <div class="activity-desc">Aktivitas baru di Cabang ${currentBranch.charAt(0).toUpperCase() + currentBranch.slice(1)}</div>
+                    <div class="activity-time">Baru saja</div>
+                </div>
+            `;
+            
+            // Add to top of activity list
+            activityContainer.insertBefore(newActivity, activityContainer.firstChild);
+            
+            // Keep only last 5 activities
+            while (activityContainer.children.length > 5) {
+                activityContainer.removeChild(activityContainer.lastChild);
+            }
+        }
+
+        // Initialize members table on page load
+        setTimeout(() => {
+            updateMembersTable();
+        }, 500);
+
+        // Auto-save form data (simulate)
+        document.getElementById('addMemberForm').addEventListener('input', function() {
+            // In real app, this could auto-save draft data
+            localStorage.setItem('branchAdminDraft', JSON.stringify({}));
+        });
+
+        // Keyboard shortcuts for common actions
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + N = Add new member
+            if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
+                e.preventDefault();
+                showSection('add-member');
+                showNotification('Shortcut: Tambah anggota baru', 'success');
+            }
+            
+            // Ctrl/Cmd + M = View members
+            if ((e.ctrlKey || e.metaKey) && e.key === 'm') {
+                e.preventDefault();
+                showSection('members');
+                showNotification('Shortcut: Lihat anggota', 'success');
+            }
+            
+            // Ctrl/Cmd + R = View reports
+            if ((e.ctrlKey || e.metaKey) && e.key === 'r') {
+                e.preventDefault();
+                showSection('reports');
+                showNotification('Shortcut: Laporan', 'success');
+            }
+        });
+
+        // Branch-specific welcome message
+        setTimeout(() => {
+            const branchName = currentBranch.charAt(0).toUpperCase() + currentBranch.slice(1);
+            showNotification(`Selamat datang di Dashboard Admin Cabang ${branchName}!`, 'success');
+        }, 1000);
+
+        // Data validation for forms
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function validatePhone(phone) {
+            const phoneRegex = /^[0-9+\-\s()]+$/;
+            return phoneRegex.test(phone) && phone.length >= 10;
+        }
+
+        // Enhanced form validation
+        document.getElementById('addMemberForm').addEventListener('submit', function(e) {
+            const email = this.querySelector('[name="email"]').value;
+            const phone = this.querySelector('[name="noHP"]').value;
+            
+            if (!validateEmail(email)) {
+                e.preventDefault();
+                showNotification('Format email tidak valid!', 'error');
+                return;
+            }
+            
+            if (!validatePhone(phone)) {
+                e.preventDefault();
+                showNotification('Format nomor HP tidak valid!', 'error');
+                return;
+            }
+        });
+
+        // Branch admin restrictions reminder
+        function showRestrictionMessage() {
+            showNotification('Fitur ini hanya tersedia untuk Central Admin', 'warning');
+        }
+
+        // Context menu for member rows (right-click functionality)
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.closest('.member-row')) {
+                e.preventDefault();
+                const memberId = e.target.closest('.member-row').querySelector('td:nth-child(2)').textContent;
+                showNotification(`Menu konteks untuk anggota: ${memberId}`, 'success');
+            }
+        });
+
+        // Auto-refresh data every 5 minutes
+        setInterval(() => {
+            console.log('Auto-refreshing branch data...');
+            updateStatistics();
+            // In real app, this would fetch fresh data from server
+        }, 300000); // 5 minutes
+
+        // Initialize tooltips for better UX
+        document.querySelectorAll('[title]').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                // Enhanced tooltip functionality could be added here
+            });
+        });
+
+        // Backup reminder for branch admin
+        setInterval(() => {
+            if (Math.random() > 0.95) { // Very occasional reminder
+                showNotification('Jangan lupa backup data anggota secara berkala!', 'warning');
+            }
+        }, 600000); // 10 minutes
+
+        // Performance monitoring
+        window.addEventListener('load', function() {
+            console.log('Branch Admin Dashboard loaded successfully');
+            console.log(`Managing branch: ${currentBranch}`);
+            console.log(`Total members in branch: ${branchMembers.length}`);
+        });
+    </script>
+</body>
+</html>
+            <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDPI - Branch Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 50%, #66bb6a 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .branch-admin-profile {
+            text-align: center;
+            padding: 0 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 2rem;
+        }
+
+        .admin-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .admin-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-role {
+            background: linear-gradient(45deg, #ff9800, #f57c00);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-branch {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(76, 175, 80, 0.1);
+            border-left-color: #4caf50;
+            color: #1b5e20;
+        }
+
+        .nav-icon {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 2rem;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            color: #1b5e20;
+            font-weight: 600;
+        }
+
+        .branch-indicator {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #f44336, #d32f2f);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #ff9800, #f57c00);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: #1b5e20;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Statistics Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2e7d32;
+            display: block;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .stat-change {
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+
+        .stat-increase {
+            color: #4caf50;
+        }
+
+        .stat-decrease {
+            color: #f44336;
+        }
+
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-table th {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table tr:hover {
+            background: rgba(76, 175, 80, 0.05);
+        }
+
+        .member-row {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .member-row:hover {
+            background: rgba(76, 175, 80, 0.1) !important;
+            transform: translateY(-1px);
+        }
+
+        /* Search and Filter */
+        .search-filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .filter-select {
+            padding: 0.8rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            min-width: 150px;
+            transition: border-color 0.3s;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
+
+        /* Form Styles */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1b5e20;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 3% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #1b5e20;
+            font-weight: 600;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-aktif {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .status-non-aktif {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .status-meninggal {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        /* Branch Restriction Notice */
+        .branch-notice {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid #4caf50;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            color: #1b5e20;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quick-action-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .quick-action-card:hover {
+            transform: translateY(-3px);
+            border-color: #4caf50;
+            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.2);
+        }
+
+        .quick-action-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .quick-action-title {
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-action-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 3000;
+            transform: translateX(100%);
+            transition: transform 0.3s;
+        }
+
+        .notification.success {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+        }
+
+        .notification.error {
+            background: linear-gradient(45deg, #f44336, #d32f2f);
+        }
+
+        .notification.warning {
+            background: linear-gradient(45deg, #ff9800, #f57c00);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Recent Activity */
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s;
+        }
+
+        .activity-item:hover {
+            background: rgba(76, 175, 80, 0.05);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 0.3rem;
+        }
+
+        .activity-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .activity-time {
+            color: #999;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="branch-admin-profile">
+                <div class="admin-avatar">👨‍💼</div>
+                <div class="admin-name" id="adminName">Dr. Admin Riau</div>
+                <div class="admin-role">Branch Admin</div>
+                <div class="admin-branch" id="adminBranch">Cabang Riau</div>
+            </div>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                            <span class="nav-icon">📊</span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#members" class="nav-link" data-section="members">
+                            <span class="nav-icon">👥</span>
+                            Anggota Cabang
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#add-member" class="nav-link" data-section="add-member">
+                            <span class="nav-icon">➕</span>
+                            Tambah Anggota
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#reports" class="nav-link" data-section="reports">
+                            <span class="nav-icon">📈</span>
+                            Laporan Cabang
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#events" class="nav-link" data-section="events">
+                            <span class="nav-icon">📅</span>
+                            Kegiatan Cabang
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#profile" class="nav-link" data-section="profile">
+                            <span class="nav-icon">👤</span>
+                            Profil Admin
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="logout()">
+                            <span class="nav-icon">🚪</span>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <h1 class="page-title" id="pageTitle">Dashboard Admin Cabang</h1>
+                <div class="branch-indicator">
+                    <span>🏥</span>
+                    <span id="currentBranch">Cabang Riau</span>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section">
+                <div class="branch-notice">
+                    <span>ℹ️</span>
+                    <span>Anda mengelola anggota untuk <strong id="branchNotice">Cabang Riau</strong>. Untuk bantuan, hubungi Central Admin.</span>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number" id="totalBranchMembers">123</span>
+                        <div class="stat-label">Total Anggota Cabang</div>
+                        <div class="stat-change stat-increase">+3 bulan ini</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="activeBranchMembers">118</span>
+                        <div class="stat-label">Anggota Aktif</div>
+                        <div class="stat-change stat-increase">+2 bulan ini</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="newMembersThisMonth">3</span>
+                        <div class="stat-label">Anggota Baru Bulan Ini</div>
+                        <div class="stat-change stat-increase">+1 dari bulan lalu</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="pendingApplications">2</span>
+                        <div class="stat-label">Aplikasi Pending</div>
+                        <div class="stat-change stat-decrease">-1 dari minggu lalu</div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <div class="quick-action-card" onclick="showSection('add-member')">
+                        <div class="quick-action-icon">➕</div>
+                        <div class="quick-action-title">Tambah Anggota Baru</div>
+                        <div class="quick-action-desc">Daftarkan anggota baru untuk cabang Anda</div>
+                    </div>
+                    <div class="quick-action-card" onclick="showSection('members')">
+                        <div class="quick-action-icon">👥</div>
+                        <div class="quick-action-title">Kelola Anggota</div>
+                        <div class="quick-action-desc">Lihat dan edit data anggota cabang</div>
+                    </div>
+                    <div class="quick-action-card" onclick="showSection('reports')">
+                        <div class="quick-action-icon">📊</div>
+                        <div class="quick-action-title">Generate Laporan</div>
+                        <div class="quick-action-desc">Buat laporan aktivitas cabang</div>
+                    </div>
+                    <div class="quick-action-card" onclick="exportMembers()">
+                        <div class="quick-action-icon">📥</div>
+                        <div class="quick-action-title">Export Data</div>
+                        <div class="quick-action-desc">Download data anggota cabang</div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="card-title">📋 Aktivitas Terbaru</h3>
+                    <div id="recentActivity">
+                        <div class="activity-item">
+                            <div class="activity-icon">👤</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Anggota baru ditambahkan</div>
+                                <div class="activity-desc">dr. Budi Santoso, Sp.P bergabung dengan cabang</div>
+                                <div class="activity-time">2 jam yang lalu</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">✏️</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Data anggota diperbarui</div>
+                                <div class="activity-desc">Profil dr. Siti Aminah, Sp.P diperbarui</div>
+                                <div class="activity-time">5 jam yang lalu</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">📊</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Laporan bulanan digenerate</div>
+                                <div class="activity-desc">Laporan November 2024 telah dibuat</div>
+                                <div class="activity-time">1 hari yang lalu</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Members Management Section -->
+            <section id="members-section" class="content-section" style="display: none;">
+                <div class="content-card">
+                    <div class="card-title">
+                        👥 Anggota Cabang Riau
+                        <button class="btn btn-primary" onclick="showSection('add-member')">
+                            ➕ Tambah Anggota
+                        </button>
+                    </div>
+
+                    <div class="search-filter-bar">
+                        <div class="search-box" style="position: relative;">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" class="search-input" placeholder="Cari anggota..." id="memberSearch">
+                        </div>
+                        <select class="filter-select" id="statusFilter">
+                            <option value="">Semua Status</option>
+                            <option value="aktif">Aktif</option>
+                            <option value="non-aktif">Non-Aktif</option>
+                            <option value="meninggal">Meninggal Dunia</option>
+                        </select>
+                        <select class="filter-select" id="genderFilter">
+                            <option value="">Semua Jenis Kelamin</option>
+                            <option value="L">Laki-laki</option>
+                            <option value="P">Perempuan</option>
+                        </select>
+                        <button class="btn btn-secondary" onclick="exportMembers()">📥 Export Excel</button>
+                    </div>
+
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>NPA</th>
+                                    <th>Nama</th>
+                                    <th>Status</th>
+                                    <th>Bergabung</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="membersTable">
+                                <tr class="member-row">
+                                    <td>1</td>
+                                    <td>198205062014121003</td>
+                                    <td>dr. ADI SATRIYO, Sp.P</td>
+                                    <td><span class="status-badge status-aktif">Aktif</span></td>
+                                    <td>15 Jan 2015</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-secondary btn-sm" onclick="viewMember('198205062014121003')">👁️</button>
+                                            <button class="btn btn-primary btn-sm" onclick="editMember('198205062014121003')">✏️</button>
+                                            <button class="btn btn-danger btn-sm" onclick="deleteMember('198205062014121003')">🗑️</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="member-row">
+                                    <td>2</td>
+                                    <td>197004221994032002</td>
+                                    <td>dr. SITI AMINAH, Sp.P</td>
+                                    <td><span class="status-badge status-aktif">Aktif</span></td>
+                                    <td>20 Mar 2018</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-secondary btn-sm" onclick="viewMember('197004221994032002')">👁️</button>
+                                            <button class="btn btn-primary btn-sm" onclick="editMember('197004221994032002')">✏️</button>
+                                            <button class="btn btn-danger btn-sm" onclick="deleteMember('197004221994032002')">🗑️</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="member-row">
+                                    <td>3</td>
+                                    <td>198801152020121005</td>
+                                    <td>dr. BUDI SANTOSO, Sp.P</td>
+                                    <td><span class="status-badge status-aktif">Aktif</span></td>
+                                    <td>01 Dec 2024</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-secondary btn-sm" onclick="viewMember('198801152020121005')">👁️</button>
+                                            <button class="btn btn-primary btn-sm

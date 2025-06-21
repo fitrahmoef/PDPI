@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDPI - Member Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 50%, #66bb6a 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .member-profile {
+            text-align: center;
+            padding: 0 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 2rem;
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .member-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-npa {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-branch {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(76, 175, 80, 0.1);
+            border-left-color: #4caf50;
+            color: #1b5e20;
+        }
+
+        .nav-icon {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 2rem;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            color: #1b5e20;
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: #1b5e20;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 0.6rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            min-width: 150px;
+            transition: border-color 0.3s;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
+
+        /* Table Styles */
+        .members-table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .members-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            min-width: 800px;
+        }
+
+        .members-table th {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .members-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .members-table tr:hover {
+            background: rgba(76, 175, 80, 0.05);
+        }
+
+        .member-row {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .member-row:hover {
+            background: rgba(76, 175, 80, 0.1) !important;
+            transform: translateY(-1px);
+        }
+
+        .member-name-cell {
+            font-weight: 600;
+            color: #1b5e20;
+        }
+
+        .member-npa-cell {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-aktif {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .status-non-aktif {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .status-meninggal {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+
+        .position-cell {
+            font-size: 0.9rem;
+            color: #666;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 95%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .close {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .close:hover {
+            opacity: 1;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        /* Profile Detail Styles */
+        .profile-header {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1b5e20;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-npa {
+            font-size: 1.1rem;
+            color: #666;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-status {
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .profile-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: #1b5e20;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e8f5e8;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .workplace-item {
+            background: #f0f8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        .workplace-name {
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 0.5rem;
+        }
+
+        .workplace-location {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Statistics Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2e7d32;
+            display: block;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .pagination button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pagination button:hover {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .pagination button.active {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-container {
+                width: 100%;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4caf50;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .empty-state img {
+            width: 120px;
+            opacity: 0.5;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="member-profile">
+                <div class="member-avatar">👨‍⚕️</div>
+                <div class="member-name">dr. Current Member</div>
+                <div class="member-npa">NPA: 198205062014121003</div>
+                <div class="member-branch">Cabang Riau</div>
+            </div>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#directory" class="nav-link active" data-section="directory">
+                            <span class="nav-icon">📋</span>
+                            Direktori Anggota
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#my-profile" class="nav-link" data-section="my-profile">
+                            <span class="nav-icon">👤</span>
+                            Profil Saya
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#events" class="nav-link" data-section="events">
+                            <span class="nav-icon">📅</span>
+                            Acara & Kegiatan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#resources" class="nav-link" data-section="resources">
+                            <span class="nav-icon">📚</span>
+                            Sumber Daya
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#settings" class="nav-link" data-section="settings">
+                            <span class="nav-icon">⚙️</span>
+                            Pengaturan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="logout()">
+                            <span class="nav-icon">🚪</span>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <h1 class="page-title" id="pageTitle">Direktori Anggota PDPI</h1>
+                <div class="header-actions">
+                    <div class="search-container">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="search-input" placeholder="Cari anggota..." id="globalSearch">
+                    </div>
+                    <button class="btn btn-secondary" onclick="showMyProfile()">👤 Profil Saya</button>
+                </div>
+            </header>
+
+            <!-- Directory Section -->
+            <section id="directory-section" class="content-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number" id="totalMembers">2,847</span>
+                        <div class="stat-label">Total Anggota</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="activeMembers">2,634</span>
+                        <div class="stat-label">Anggota Aktif</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="branchCount">34</span>
+                        <div class="stat-label">Cabang</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="onlineMembers">234</span>
+                        <div class="stat-label">Online Hari Ini</div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="card-title">📋 Daftar Anggota PDPI</h3>
+                    
+                    <div class="filter-bar">
+                        <select class="filter-select" id="branchFilter">
+                            <option value="">Semua Cabang</option>
+                            <option value="aceh">Cabang Aceh</option>
+                            <option value="sumut">Cabang Sumatera Utara</option>
+                            <option value="riau">Cabang Riau</option>
+                            <option value="jakarta">Cabang Jakarta</option>
+                            <option value="jabar">Cabang Jawa Barat</option>
+                            <option value="jateng">Cabang Jawa Tengah</option>
+                            <option value="jatim">Cabang Jawa Timur</option>
+                            <option value="bali">Cabang Bali</option>
+                        </select>
+                        
+                        <select class="filter-select" id="statusFilter">
+                            <option value="">Semua Status</option>
+                            <option value="aktif">Aktif</option>
+                            <option value="non-aktif">Non-Aktif</option>
+                            <option value="meninggal">Meninggal Dunia</option>
+                        </select>
+                        
+                        <select class="filter-select" id="genderFilter">
+                            <option value="">Semua Jenis Kelamin</option>
+                            <option value="L">Laki-laki</option>
+                            <option value="P">Perempuan</option>
+                        </select>
+                        
+                        <button class="btn btn-secondary" onclick="clearFilters()">🔄 Reset Filter</button>
+                    </div>
+
+                    <div class="members-table-container">
+                        <table class="members-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>NPA</th>
+                                    <th>Nama Anggota</th>
+                                    <th>Cabang</th>
+                                    <th>Jabatan</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="membersTableBody">
+                                <!-- Member data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination" id="pagination">
+                        <!-- Pagination will be generated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Profile Section -->
+            <section id="my-profile-section" class="content-section" style="display: none;">
+                <div class="content-card">
+                    <h3 class="card-title">👤 Profil Saya</h3>
+                    <p>Fitur profil pribadi akan ditampilkan di sini...</p>
+                </div>
+            </section>
+
+            <!-- Events Section -->
+            <section id="events-section" class="content-section" style="display: none;">
+                <div class="content-card">
+                    <h3 class="card-title">📅 Acara & Kegiatan</h3>
+                    <p>Daftar acara dan kegiatan PDPI akan ditampilkan di sini...</p>
+                </div>
+            </section>
+
+            <!-- Resources Section -->
+            <section id="resources-section" class="content-section" style="display: none;">
+                <div class="content-card">
+                    <h3 class="card-title">📚 Sumber Daya</h3>
+                    <p>Jurnal, publikasi, dan sumber daya lainnya akan ditampilkan di sini...</p>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="content-section" style="display: none;">
+                <div class="content-card">
+                    <h3 class="card-title">⚙️ Pengaturan Akun</h3>
+                    <p>Pengaturan akun dan preferensi akan ditampilkan di sini...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Member Detail Modal -->
+    <div id="memberDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalMemberName">Detail Anggota</h2>
+                <button class="close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-header">
+                    <div class="profile-photo" id="modalProfilePhoto">👨‍⚕️</div>
+                    <div class="profile-info">
+                        <div class="profile-name" id="modalFullName">Dr. Nama Lengkap</div>
+                        <div class="profile-npa" id="modalNPA">NPA: 198205062014121003</div>
+                        <div class="profile-status">
+                            <span class="status-badge status-aktif" id="modalStatus">Aktif</span>
+                        </div>
+                        <div class="profile-branch" id="modalBranch">Cabang Riau</div>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h3 class="section-title">👤 Informasi Pribadi</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Tanggal Bergabung</div>
+                            <div class="info-value" id="modalJoinDate">15 Maret 2018</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h3 class="section-title">🏥 Tempat Praktik</h3>
+                    <div id="modalWorkplaces">
+                        <div class="workplace-item">
+                            <div class="workplace-name">RSUP Persahabatan</div>
+                            <div class="workplace-location">Jakarta Timur, DKI Jakarta</div>
+                        </div>
+                        <div class="workplace-item">
+                            <div class="workplace-name">Klinik Paru Sehat</div>
+                            <div class="workplace-location">Bekasi, Jawa Barat</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h3 class="section-title">💼 Jabatan & Posisi</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Jabatan Saat Ini</div>
+                            <div class="info-value" id="modalCurrentPosition">Asisten Manajer Administrasi Sumber Daya Manusia</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Unit Kerja</div>
+                            <div class="info-value" id="modalWorkUnit">Instalasi Rawat Intensif</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Golongan Terakhir</div>
+                            <div class="info-value" id="modalLastRank">IIIc</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Pendidikan Terakhir</div>
+                            <div class="info-value" id="modalLastEducation">Magister Administrasi Rumah Sakit</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample member data
+        const membersData = [
+            {
+                no: 1,
+                npa: "198205062014121003",
+                name: "dr. ADI SATRIYO, Sp.P",
+                fullName: "dr. ADI SATRIYO, Sp.P",
+                branch: "Cabang Riau",
+                position: "Dokter Pendidik Klinik Ahli Madya",
+                status: "aktif",
+                gender: "L",
+                birthPlace: "Pekanbaru",
+                birthDate: "6 Mei 1982",
+                religion: "Islam",
+                maritalStatus: "Menikah",
+                homeAddress: "Jl. Sudirman No. 123, Pekanbaru",
+                phone: "081234567890",
+                email: "adi.satriyo@pdpi.org",
+                nik: "1471050612345678",
+                npwp: "12.345.678.9-123.000",
+                alumni: "FK UNRI",
+                graduation: "Juni 2014",
+                membershipStatus: "Biasa",
+                joinDate: "15 Januari 2015",
+                workplaces: [
+                    { name: "RSUD Arifin Achmad", location: "Pekanbaru, Riau" },
+                    { name: "Klinik Paru Prima", location: "Pekanbaru, Riau" }
+                ],
+                currentPosition: "Dokter Spesialis Paru",
+                workUnit: "Poliklinik Paru",
+                lastRank: "IVa",
+                lastEducation: "Spesialis Pulmonologi"
+            },
+            {
+                no: 2,
+                npa: "196906141959032001",
+                name: "dr. AGNES YUNIE PURWITASARI, Sp.A(K)",
+                fullName: "dr. AGNES YUNIE PURWITASARI, Sp.A(K)",
+                branch: "Cabang Jakarta",
+                position: "Kepala Sub Pelayanan NICU",
+                status: "aktif",
+                gender: "P",
+                birthPlace: "Jakarta",
+                birthDate: "14 Juni 1969",
+                religion: "Kristen",
+                maritalStatus: "Menikah",
+                homeAddress: "Jl. Menteng Raya No. 45, Jakarta",
+                phone: "081234567891",
+                email: "agnes.yunie@pdpi.org",
+                nik: "3171014614695432",
+                npwp: "98.765.432.1-321.000",
+                alumni: "FK UI",
+                graduation: "Agustus 1995",
+                membershipStatus: "Luar Biasa",
+                joinDate: "20 Februari 2000",
+                workplaces: [
+                    { name: "RS Cipto Mangunkusumo", location: "Jakarta Pusat, DKI Jakarta" }
+                ],
+                currentPosition: "Konsultan Senior Anak",
+                workUnit: "NICU",
+                lastRank: "IVc",
+                lastEducation: "Konsultan Anak"
+            },
+            {
+                no: 3,
+                npa: "197212032014121004",
+                name: "dr. AGUNG HERI WAHYUDI, Sp.B.S",
+                fullName: "dr. AGUNG HERI WAHYUDI, Sp.B.S",
+                branch: "Cabang Jawa Barat",
+                position: "Ketua Komite Etik dan Hukum",
+                status: "aktif",
+                gender: "L",
+                birthPlace: "Bandung",
+                birthDate: "3 Desember 1972",
+                religion: "Islam",
+                maritalStatus: "Menikah",
+                homeAddress: "Jl. Dago No. 78, Bandung",
+                phone: "081234567892",
+                email: "agung.heri@pdpi.org",
+                nik: "3273120312724567",
+                npwp: "11.222.333.4-456.000",
+                alumni: "FK UNPAD",
+                graduation: "September 2014",
+                membershipStatus: "Biasa",
+                joinDate: "10 Oktober 2014",
+                workplaces: [
+                    { name: "RS Hasan Sadikin", location: "Bandung, Jawa Barat" }
+                ],
+                currentPosition: "Spesialis Bedah Saraf",
+                workUnit: "Bedah Saraf",
+                lastRank: "IVb",
+                lastEducation: "Spesialis Bedah Saraf"
+            },
+            {
+                no: 4,
+                npa: "197408142006041010",
+                name: "Prof. Dr. dr. AGUS DWI SUSANTO, Sp.P(K)",
+                fullName: "Prof. Dr. dr. AGUS DWI SUSANTO, Sp.P(K)",
+                branch: "Cabang Jakarta",
+                position: "Direktur Utama",
+                status: "aktif",
+                gender: "L",
+                birthPlace: "Surakarta",
+                birthDate: "14 Agustus 1974",
+                religion: "Islam",
+                maritalStatus: "Menikah",
+                homeAddress: "Jl. Kemang Raya No. 12, Jakarta",
+                phone: "081234567893",
+                email: "agus.dwi@pdpi.org",
+                nik: "3371014814748901",
+                npwp: "55.666.777.8-789.000",
+                alumni: "FK UNS",
+                graduation: "Juli 2006",
+                membershipStatus: "Luar Biasa",
+                joinDate: "1 Januari 2007",
+                workplaces: [
+                    { name: "RS Persahabatan", location: "Jakarta Timur, DKI Jakarta" },
+                    { name: "FK Universitas Indonesia", location: "Depok, Jawa Barat" }
+                ],
+                currentPosition: "Profesor & Konsultan Paru",
+                workUnit: "Departemen Pulmonologi",
+                lastRank: "Professor",
+                lastEducation: "Profesor Pulmonologi"
+            },
+            {
+                no: 5,
+                npa: "197004221994032002",
+                name: "AISH FARIA, SST",
+                fullName: "AISH FARIA, SST",
+                branch: "Cabang Riau",
+                position: "Nutrisionis Ahli Muda",
+                status: "non-aktif",
+                gender: "P",
+                birthPlace: "Pekanbaru",
+                birthDate: "22 April 1970",
+                religion: "Islam",
+                maritalStatus: "Menikah",
+                homeAddress: "Jl. Hang Tuah No. 89, Pekanbaru",
+                phone: "081234567894",
+                email: "aish.faria@pdpi.org",
+                nik: "1471042204704321",
+                npwp: "99.888.777.6-654.000",
+                alumni: "FK UNRI",
+                graduation: "Mei 1994",
+                membershipStatus: "Biasa",
+                joinDate: "15 Juni 1995",
+                workplaces: [
+                    { name: "RSUD Arifin Achmad", location: "Pekanbaru, Riau" }
+                ],
+                currentPosition: "Nutrisionis",
+                workUnit: "Instalasi Gizi",
+                lastRank: "IIIb",
+                lastEducation: "Sarjana Sains Terapan"
+            }
+        ];
+
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        let filteredData = [...membersData];
+
+        // Initialize the dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            loadMemberData();
+            updateStatistics();
+        });
+
+        function setupEventListeners() {
+            // Navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (this.dataset.section) {
+                        e.preventDefault();
+                        showSection(this.dataset.section);
+                        
+                        // Update active nav
+                        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            // Search functionality
+            document.getElementById('globalSearch').addEventListener('input', handleSearch);
+            
+            // Filter functionality
+            document.getElementById('branchFilter').addEventListener('change', handleFilters);
+            document.getElementById('statusFilter').addEventListener('change', handleFilters);
+            document.getElementById('genderFilter').addEventListener('change', handleFilters);
+        }
+
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show selected section
+            const targetSection = document.getElementById(`${sectionName}-section`);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+            }
+
+            // Update page title
+            const titles = {
+                'directory': 'Direktori Anggota PDPI',
+                'my-profile': 'Profil Saya',
+                'events': 'Acara & Kegiatan',
+                'resources': 'Sumber Daya',
+                'settings': 'Pengaturan Akun'
+            };
+            document.getElementById('pageTitle').textContent = titles[sectionName] || 'Direktori Anggota PDPI';
+        }
+
+        function loadMemberData() {
+            const tableBody = document.getElementById('membersTableBody');
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageData = filteredData.slice(startIndex, endIndex);
+
+            tableBody.innerHTML = '';
+
+            pageData.forEach(member => {
+                const row = document.createElement('tr');
+                row.className = 'member-row';
+                row.onclick = () => showMemberDetail(member);
+                
+                row.innerHTML = `
+                    <td>${member.no}</td>
+                    <td class="member-npa-cell">${member.npa}</td>
+                    <td class="member-name-cell">${member.name}</td>
+                    <td>${member.branch}</td>
+                    <td class="position-cell" title="${member.position}">${member.position}</td>
+                    <td><span class="status-badge status-${member.status}">${member.status}</span></td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); showMemberDetail(membersData[${member.no - 1}])">
+                            👁️ Lihat
+                        </button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+
+            updatePagination();
+        }
+
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+            const pagination = document.getElementById('pagination');
+            
+            pagination.innerHTML = '';
+
+            // Previous button
+            const prevBtn = document.createElement('button');
+            prevBtn.textContent = '◀ Prev';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.onclick = () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    loadMemberData();
+                }
+            };
+            pagination.appendChild(prevBtn);
+
+            // Page numbers
+            const startPage = Math.max(1, currentPage - 2);
+            const endPage = Math.min(totalPages, currentPage + 2);
+
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.textContent = i;
+                pageBtn.className = i === currentPage ? 'active' : '';
+                pageBtn.onclick = () => {
+                    currentPage = i;
+                    loadMemberData();
+                };
+                pagination.appendChild(pageBtn);
+            }
+
+            // Next button
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = 'Next ▶';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.onclick = () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    loadMemberData();
+                }
+            };
+            pagination.appendChild(nextBtn);
+
+            // Add page info
+            const pageInfo = document.createElement('span');
+            pageInfo.style.marginLeft = '1rem';
+            pageInfo.style.color = '#666';
+            pageInfo.textContent = `Halaman ${currentPage} dari ${totalPages} (${filteredData.length} anggota)`;
+            pagination.appendChild(pageInfo);
+        }
+
+        function handleSearch() {
+            const searchTerm = document.getElementById('globalSearch').value.toLowerCase();
+            applyFilters();
+        }
+
+        function handleFilters() {
+            currentPage = 1;
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('globalSearch').value.toLowerCase();
+            const branchFilter = document.getElementById('branchFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const genderFilter = document.getElementById('genderFilter').value;
+
+            filteredData = membersData.filter(member => {
+                const matchSearch = !searchTerm || 
+                    member.name.toLowerCase().includes(searchTerm) ||
+                    member.npa.includes(searchTerm) ||
+                    member.position.toLowerCase().includes(searchTerm);
+
+                const matchBranch = !branchFilter || member.branch.toLowerCase().includes(branchFilter);
+                const matchStatus = !statusFilter || member.status === statusFilter;
+                const matchGender = !genderFilter || member.gender === genderFilter;
+
+                return matchSearch && matchBranch && matchStatus && matchGender;
+            });
+
+            loadMemberData();
+        }
+
+        function clearFilters() {
+            document.getElementById('globalSearch').value = '';
+            document.getElementById('branchFilter').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('genderFilter').value = '';
+            
+            filteredData = [...membersData];
+            currentPage = 1;
+            loadMemberData();
+        }
+
+        function showMemberDetail(member) {
+            // Populate modal with member data
+            document.getElementById('modalMemberName').textContent = member.fullName;
+            document.getElementById('modalFullName').textContent = member.fullName;
+            document.getElementById('modalNPA').textContent = `NPA: ${member.npa}`;
+            document.getElementById('modalStatus').textContent = member.status;
+            document.getElementById('modalStatus').className = `status-badge status-${member.status}`;
+            document.getElementById('modalBranch').textContent = member.branch;
+            
+            // Personal info
+            document.getElementById('modalBirthInfo').textContent = `${member.birthPlace}, ${member.birthDate}`;
+            document.getElementById('modalGender').textContent = member.gender === 'L' ? 'Laki-laki' : 'Perempuan';
+            document.getElementById('modalReligion').textContent = member.religion;
+            document.getElementById('modalMaritalStatus').textContent = member.maritalStatus;
+            document.getElementById('modalHomeAddress').textContent = member.homeAddress;
+            document.getElementById('modalPhone').textContent = member.phone;
+            document.getElementById('modalEmail').textContent = member.email;
+            document.getElementById('modalNIK').textContent = member.nik;
+            document.getElementById('modalNPWP').textContent = member.npwp;
+            
+            // Education & professional info
+            document.getElementById('modalAlumni').textContent = member.alumni;
+            document.getElementById('modalGraduation').textContent = member.graduation;
+            document.getElementById('modalMembershipStatus').textContent = member.membershipStatus;
+            document.getElementById('modalJoinDate').textContent = member.joinDate;
+            
+            // Position info
+            document.getElementById('modalCurrentPosition').textContent = member.currentPosition;
+            document.getElementById('modalWorkUnit').textContent = member.workUnit;
+            document.getElementById('modalLastRank').textContent = member.lastRank;
+            document.getElementById('modalLastEducation').textContent = member.lastEducation;
+            
+            // Workplaces
+            const workplacesContainer = document.getElementById('modalWorkplaces');
+            workplacesContainer.innerHTML = '';
+            member.workplaces.forEach(workplace => {
+                const workplaceDiv = document.createElement('div');
+                workplaceDiv.className = 'workplace-item';
+                workplaceDiv.innerHTML = `
+                    <div class="workplace-name">${workplace.name}</div>
+                    <div class="workplace-location">${workplace.location}</div>
+                `;
+                workplacesContainer.appendChild(workplaceDiv);
+            });
+
+            // Set profile photo based on gender
+            const profilePhoto = document.getElementById('modalProfilePhoto');
+            profilePhoto.textContent = member.gender === 'L' ? '👨‍⚕️' : '👩‍⚕️';
+            
+            // Show modal
+            document.getElementById('memberDetailModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('memberDetailModal').style.display = 'none';
+        }
+
+        function showMyProfile() {
+            // Show current user's profile
+            const currentMember = membersData[0]; // In real app, this would be the logged-in user
+            showMemberDetail(currentMember);
+        }
+
+        function updateStatistics() {
+            // Animate counters
+            animateCounter('totalMembers', membersData.length);
+            animateCounter('activeMembers', membersData.filter(m => m.status === 'aktif').length);
+            animateCounter('branchCount', new Set(membersData.map(m => m.branch)).size);
+            animateCounter('onlineMembers', Math.floor(Math.random() * 300) + 100);
+        }
+
+        function animateCounter(elementId, targetValue) {
+            const element = document.getElementById(elementId);
+            const startValue = 0;
+            const duration = 1500;
+            const increment = targetValue / (duration / 16);
+            let currentValue = startValue;
+
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= targetValue) {
+                    element.textContent = targetValue.toLocaleString('id-ID');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(currentValue).toLocaleString('id-ID');
+                }
+            }, 16);
+        }
+
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('memberDetailModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Simulate real-time updates
+        setInterval(() => {
+            const onlineElement = document.getElementById('onlineMembers');
+            if (onlineElement) {
+                const currentValue = parseInt(onlineElement.textContent.replace(/,/g, ''));
+                const change = Math.floor(Math.random() * 10) - 5; // -5 to +5
+                const newValue = Math.max(50, currentValue + change);
+                onlineElement.textContent = newValue.toLocaleString('id-ID');
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
+                            <div class="info-label">Tempat, Tanggal Lahir</div>
+                            <div class="info-value" id="modalBirthInfo">Pekanbaru, 23 September 1975</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Jenis Kelamin</div>
+                            <div class="info-value" id="modalGender">Perempuan</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Agama</div>
+                            <div class="info-value" id="modalReligion">Islam</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Status Perkawinan</div>
+                            <div class="info-value" id="modalMaritalStatus">Menikah</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Alamat Rumah</div>
+                            <div class="info-value" id="modalHomeAddress">Taman Raya Bekasi Blok 13 No.36 Tambun Bekasi</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">No. Telepon</div>
+                            <div class="info-value" id="modalPhone">081213936974</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Email</div>
+                            <div class="info-value" id="modalEmail">anggrianihasututi@gmail.com</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">NIK</div>
+                            <div class="info-value" id="modalNIK">3216066309750011</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">NPWP</div>
+                            <div class="info-value" id="modalNPWP">74.408.126.6435</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h3 class="section-title">🎓 Pendidikan & Keprofesian</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Alumni</div>
+                            <div class="info-value" id="modalAlumni">FK UNRI</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Bulan & Tahun Lulus Spesialis</div>
+                            <div class="info-value" id="modalGraduation">Mei 2003</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Status Anggota</div>
+                            <div class="info-value" id="modalMembershipStatus">Biasa</div>
+                        </div>
+                        <div class="info-item">

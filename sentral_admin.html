@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDPI - Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 50%, #66bb6a 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .admin-profile {
+            text-align: center;
+            padding: 0 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 2rem;
+        }
+
+        .admin-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .admin-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-role {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(76, 175, 80, 0.1);
+            border-left-color: #4caf50;
+            color: #1b5e20;
+        }
+
+        .nav-icon {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 2rem;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            color: #1b5e20;
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #f44336, #d32f2f);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: #1b5e20;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Statistics Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2e7d32;
+            display: block;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-table th {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table tr:hover {
+            background: rgba(76, 175, 80, 0.05);
+        }
+
+        /* Form Styles */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1b5e20;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
+
+        .form-control select {
+            cursor: pointer;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 3% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #1b5e20;
+            font-weight: 600;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        /* Search and Filter */
+        .search-filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .filter-select {
+            min-width: 150px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        /* Permissions Panel */
+        .permissions-panel {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .permission-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .permission-item input[type="checkbox"] {
+            margin-right: 0.8rem;
+            transform: scale(1.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 3000;
+            transform: translateX(100%);
+            transition: transform 0.3s;
+        }
+
+        .notification.success {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+        }
+
+        .notification.error {
+            background: linear-gradient(45deg, #f44336, #d32f2f);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Branch Selector for Branch Admin */
+        .branch-selector {
+            background: rgba(76, 175, 80, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .access-denied {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .access-denied h3 {
+            color: #f44336;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="admin-profile">
+                <div class="admin-avatar" id="adminAvatar">👨‍⚕️</div>
+                <div class="admin-name" id="adminName">Dr. Admin</div>
+                <div class="admin-role" id="adminRole">Central Admin</div>
+            </div>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                            <span class="nav-icon">📊</span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#members" class="nav-link" data-section="members">
+                            <span class="nav-icon">👥</span>
+                            Kelola Anggota
+                        </a>
+                    </li>
+                    <li class="nav-item" id="adminManagementNav">
+                        <a href="#admin-management" class="nav-link" data-section="admin-management">
+                            <span class="nav-icon">⚙️</span>
+                            Kelola Admin Cabang
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#reports" class="nav-link" data-section="reports">
+                            <span class="nav-icon">📈</span>
+                            Laporan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#settings" class="nav-link" data-section="settings">
+                            <span class="nav-icon">⚙️</span>
+                            Pengaturan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="logout()">
+                            <span class="nav-icon">🚪</span>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <h1 class="page-title" id="pageTitle">Dashboard Admin PDPI</h1>
+                <div class="header-actions">
+                    <select id="branchSelector" class="form-control" style="display: none;">
+                        <option value="">Pilih Cabang</option>
+                    </select>
+                    <button class="btn btn-secondary" onclick="showProfile()">👤 Profile</button>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number" id="totalMembersAdmin">2,847</span>
+                        <div class="stat-label">Total Anggota</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="activeMembersAdmin">2,634</span>
+                        <div class="stat-label">Anggota Aktif</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="branchAdminsCount">34</span>
+                        <div class="stat-label">Admin Cabang</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="branchesCount">34</span>
+                        <div class="stat-label">Total Cabang</div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="card-title">📊 Aktivitas Terbaru</h3>
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Waktu</th>
+                                    <th>Aktivitas</th>
+                                    <th>Admin</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="activityLog">
+                                <tr>
+                                    <td>2024-12-01 14:30</td>
+                                    <td>Menambah anggota baru</td>
+                                    <td>Admin Riau</td>
+                                    <td><span style="color: #4caf50;">✓ Berhasil</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2024-12-01 13:15</td>
+                                    <td>Update data anggota</td>
+                                    <td>Admin Jakarta</td>
+                                    <td><span style="color: #4caf50;">✓ Berhasil</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2024-12-01 12:00</td>
+                                    <td>Export laporan bulanan</td>
+                                    <td>Central Admin</td>
+                                    <td><span style="color: #4caf50;">✓ Berhasil</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Members Management Section -->
+            <section id="members-section" class="content-section" style="display: none;">
+                <div class="content-card">
+                    <div class="card-title">
+                        👥 Manajemen Anggota
+                        <button class="btn btn-primary" onclick="openAddMemberModal()">
+                            ➕ Tambah Anggota
+                        </button>
+                    </div>
+
+                    <div class="search-filter-bar">
+                        <div class="search-box">
+                            <input type="text" class="form-control" placeholder="🔍 Cari anggota..." id="memberSearch">
+                        </div>
+                        <select class="form-control filter-select" id="statusFilter">
+                            <option value="">Semua Status</option>
+                            <option value="aktif">Aktif</option>
+                            <option value="non-aktif">Non-Aktif</option>
+                            <option value="meninggal">Meninggal Dunia</option>
+                        </select>
+                        <select class="form-control filter-select" id="branchFilter">
+                            <option value="">Semua Cabang</option>
+                            <option value="riau">Cabang Riau</option>
+                            <option value="jakarta">Cabang Jakarta</option>
+                            <option value="jawa-barat">Cabang Jawa Barat</option>
+                        </select>
+                    </div>
+
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>NPA</th>
+                                    <th>Nama</th>
+                                    <th>Cabang</th>
+                                    <th>Status</th>
+                                    <th>Bergabung</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="membersTable">
+                                <tr>
+                                    <td>198205062014121003</td>
+                                    <td>dr. ADI SATRIYO, Sp.P</td>
+                                    <td>Cabang Riau</td>
+                                    <td><span style="color: #4caf50;">Aktif</span></td>
+                                    <td>2018-03-15</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-secondary btn-sm" onclick="viewMember('198205062014121003')">👁️</button>
+                                            <button class="btn btn-primary btn-sm" onclick="editMember('198205062014121003')">✏️</button>
+                                            <button class="btn btn-danger btn-sm" onclick="deleteMember('198205062014121003')">🗑️</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- More member rows will be dynamically added -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Admin Management Section (Central Admin Only) -->
+            <section id="admin-management-section" class="content-section" style="display: none;">
+                <div class="content-card">
+                    <div class="card-title">
+                        ⚙️ Manajemen Admin Cabang
+                        <button class="btn btn-primary" onclick="openAddAdminModal()">
+                            ➕ Tambah Admin Cabang
+                        </button>
+                    </div>
+
+                    <div class="search-filter-bar">
+                        <div class="search-box">
+                            <input type="text" class="form-control" placeholder="🔍 Cari admin..." id="adminSearch">
+                        </div>
+                        <select class="form-control filter-select" id="adminBranchFilter">
+                            <option value="">Semua Cabang</option>
+                            <option value="riau">Cabang Riau</option>
+                            <option value="jakarta">Cabang Jakarta</option>
+                            <option value="jawa-barat">Cabang Jawa Barat</option>
+                        </select>
+                    </div>
+
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Nama</th>
+                                    <th>Cabang</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminTable">
+                                <tr>
+                                    <td>admin_riau</td>
+                                    <td>Dr. Budi Santoso</td>
+                                    <td>Cabang Riau</td>
+                                    <td>admin.riau@pdpi.org</td>
+                                    <td><span style="color: #4caf50;">Aktif</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-primary btn-sm" onclick="editAdmin('admin_riau')">✏️</button>
+                                            <button class="btn btn-secondary btn-sm" onclick="resetPassword('admin_riau')">🔑</button>
+                                            <button class="btn btn-danger btn-sm" onclick="deactivateAdmin('admin_riau')">🚫</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- More admin rows will be dynamically added -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports-section" class="content-section" style="display: none;">
+                <div class="content-card">
+                    <h3 class="card-title">📈 Laporan dan Statistik</h3>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Jenis Laporan</label>
+                            <select class="form-control" id="reportType">
+                                <option value="member-summary">Ringkasan Anggota</option>
+                                <option value="branch-stats">Statistik per Cabang</option>
+                                <option value="growth-analysis">Analisis Pertumbuhan</option>
+                                <option value="inactive-members">Anggota Non-Aktif</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Periode</label>
+                            <select class="form-control" id="reportPeriod">
+                                <option value="monthly">Bulanan</option>
+                                <option value="quarterly">Triwulan</option>
+                                <option value="yearly">Tahunan</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" onclick="generateReport()">📊 Generate Laporan</button>
+                        <button class="btn btn-secondary" onclick="exportReport()">📥 Export Excel</button>
+                    </div>
+
+                    <div id="reportResults" style="display: none;">
+                        <h4>Hasil Laporan</h4>
+                        <div class="data-table">
+                            <table id="reportTable">
+                                <!-- Report results will be displayed here -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="content-section" style="display: none;">
+                <div class="content-card">
+                    <h3 class="card-title">⚙️ Pengaturan Sistem</h3>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nama Organisasi</label>
+                            <input type="text" class="form-control" value="Perhimpunan Dokter Paru Indonesia">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Kontak</label>
+                            <input type="email" class="form-control" value="info@pdpi.org">
+                        </div>
+                        <div class="form-group">
+                            <label>Timeout Session (menit)</label>
+                            <input type="number" class="form-control" value="30">
+                        </div>
+                        <div class="form-group">
+                            <label>Backup Otomatis</label>
+                            <select class="form-control">
+                                <option value="daily">Harian</option>
+                                <option value="weekly">Mingguan</option>
+                                <option value="monthly">Bulanan</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary">💾 Simpan Pengaturan</button>
+                        <button class="btn btn-secondary">🔄 Reset ke Default</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add Member Modal -->
+    <div id="addMemberModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">➕ Tambah Anggota Baru</h3>
+                <button class="close" onclick="closeModal('addMemberModal')">&times;</button>
+            </div>
+            <form id="addMemberForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nama Lengkap *</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Gelar Depan</label>
+                        <input type="text" class="form-control" placeholder="dr.">
+                    </div>
+                    <div class="form-group">
+                        <label>Gelar Belakang</label>
+                        <input type="text" class="form-control" placeholder="Sp.P">
+                    </div>
+                    <div class="form-group">
+                        <label>Jenis Kelamin *</label>
+                        <select class="form-control" required>
+                            <option value="">Pilih</option>
+                            <option value="L">Laki-laki</option>
+                            <option value="P">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Cabang *</label>
+                        <select class="form-control" required id="memberBranchSelect">
+                            <option value="">Pilih Cabang</option>
+                            <option value="riau">Cabang Riau</option>
+                            <option value="jakarta">Cabang Jakarta</option>
+                            <option value="jawa-barat">Cabang Jawa Barat</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status Anggota *</label>
+                        <select class="form-control" required>
+                            <option value="">Pilih Status</option>
+                            <option value="biasa">Biasa</option>
+                            <option value="muda">Muda</option>
+                            <option value="luar-biasa">Luar Biasa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>No. HP *</label>
+                        <input type="tel" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">💾 Simpan Anggota</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('addMemberModal')">❌ Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Admin Modal -->
+    <div id="addAdminModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">➕ Tambah Admin Cabang</h3>
+                <button class="close" onclick="closeModal('addAdminModal')">&times;</button>
+            </div>
+            <form id="addAdminForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Username *</label>
+                        <input type="text" class="form-control" required placeholder="admin_cabang">
+                    </div>
+                    <div class="form-group">
+                        <label>Password *</label>
+                        <input type="password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Lengkap *</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cabang *</label>
+                        <select class="form-control" required id="adminBranchSelect">
+                            <option value="">Pilih Cabang</option>
+                            <option value="aceh">Cabang Aceh</option>
+                            <option value="sumut">Cabang Sumatera Utara</option>
+                            <option value="sumbar">Cabang Sumatera Barat</option>
+                            <option value="riau">Cabang Riau</option>
+                            <option value="kepri">Cabang Kepulauan Riau</option>
+                            <option value="jambi">Cabang Jambi</option>
+                            <option value="sumsel">Cabang Sumatera Selatan & Bangka Belitung</option>
+                            <option value="bengkulu">Cabang Bengkulu</option>
+                            <option value="lampung">Cabang Lampung</option>
+                            <option value="banten">Cabang Banten</option>
+                            <option value="jakarta">Cabang Jakarta</option>
+                            <option value="bogor">Cabang Bogor</option>
+                            <option value="bekasi">Cabang Bekasi</option>
+                            <option value="depok">Cabang Depok</option>
+                            <option value="jabar">Cabang Jawa Barat</option>
+                            <option value="jateng">Cabang Jawa Tengah</option>
+                            <option value="surakarta">Cabang Surakarta</option>
+                            <option value="yogya">Cabang Yogyakarta</option>
+                            <option value="jatim">Cabang Jawa Timur</option>
+                            <option value="malang">Cabang Malang</option>
+                            <option value="bali">Cabang Bali</option>
+                            <option value="ntb">Cabang Nusa Tenggara Barat</option>
+                            <option value="ntt">Cabang Nusa Tenggara Timur</option>
+                            <option value="kalsel">Cabang Kalimantan Selatan</option>
+                            <option value="kaltimtara">Cabang Kalimantan Timur & Utara</option>
+                            <option value="kalbar">Cabang Kalimantan Barat</option>
+                            <option value="kalteng">Cabang Kalimantan Tengah</option>
+                            <option value="sulselbara">Cabang Sulawesi Selatan-Barat-Tenggara</option>
+                            <option value="suluttenggo">Cabang Sulawesi Utara-Tengah-Gorontalo</option>
+                            <option value="maluku">Cabang Maluku & Maluku Utara</option>
+                            <option value="papua">Cabang Papua</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>No. HP</label>
+                        <input type="tel" class="form-control">
+                    </div>
+                </div>
+
+                <div class="permissions-panel">
+                    <h4>Hak Akses Admin Cabang</h4>
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm1" checked disabled>
+                        <label for="perm1">Kelola anggota cabang sendiri</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm2" checked disabled>
+                        <label for="perm2">Lihat laporan cabang</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm3" checked disabled>
+                        <label for="perm3">Export data anggota cabang</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm4">
+                        <label for="perm4">Akses data cabang lain (hanya lihat)</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">💾 Tambah Admin</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('addAdminModal')">❌ Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">👤 Profile Admin</h3>
+                <button class="close" onclick="closeModal('profileModal')">&times;</button>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" value="central_admin" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" class="form-control" value="Dr. Central Admin">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" value="admin@pdpi.org">
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <input type="text" class="form-control" value="Central Admin" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Password Baru</label>
+                    <input type="password" class="form-control" placeholder="Kosongkan jika tidak ingin mengubah">
+                </div>
+                <div class="form-group">
+                    <label>Konfirmasi Password</label>
+                    <input type="password" class="form-control" placeholder="Konfirmasi password baru">
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary">💾 Update Profile</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('profileModal')">❌ Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Global Variables
+        let currentUserRole = 'central'; // 'central' or 'branch'
+        let currentBranch = '';
+        let currentUser = {
+            username: 'central_admin',
+            name: 'Dr. Central Admin',
+            role: 'Central Admin',
+            email: 'admin@pdpi.org'
+        };
+
+        // Initialize Dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate login check and role detection
+            checkUserRole();
+            setupEventListeners();
+            loadDashboardData();
+        });
+
+        function checkUserRole() {
+            // In real app, this would check session/token
+            const urlParams = new URLSearchParams(window.location.search);
+            const role = urlParams.get('role') || 'central';
+            const branch = urlParams.get('branch') || '';
+
+            if (role === 'branch') {
+                currentUserRole = 'branch';
+                currentBranch = branch;
+                currentUser = {
+                    username: `admin_${branch}`,
+                    name: `Dr. Admin ${branch.charAt(0).toUpperCase() + branch.slice(1)}`,
+                    role: 'Branch Admin',
+                    email: `admin.${branch}@pdpi.org`
+                };
+                setupBranchAdmin();
+            } else {
+                currentUserRole = 'central';
+                setupCentralAdmin();
+            }
+
+            updateUserInterface();
+        }
+
+        function setupCentralAdmin() {
+            // Central admin has access to all features
+            document.getElementById('adminManagementNav').style.display = 'block';
+            document.getElementById('branchSelector').style.display = 'none';
+        }
+
+        function setupBranchAdmin() {
+            // Branch admin has limited access
+            document.getElementById('adminManagementNav').style.display = 'none';
+            
+            // Show branch selector (though it would be read-only for branch admin)
+            const branchSelector = document.getElementById('branchSelector');
+            branchSelector.style.display = 'block';
+            branchSelector.innerHTML = `<option value="${currentBranch}">Cabang ${currentBranch.charAt(0).toUpperCase() + currentBranch.slice(1)}</option>`;
+            branchSelector.disabled = true;
+
+            // Update member branch select to only show current branch
+            const memberBranchSelect = document.getElementById('memberBranchSelect');
+            memberBranchSelect.innerHTML = `<option value="${currentBranch}">Cabang ${currentBranch.charAt(0).toUpperCase() + currentBranch.slice(1)}</option>`;
+            memberBranchSelect.disabled = true;
+
+            // Hide admin management section completely
+            const adminSection = document.getElementById('admin-management-section');
+            if (adminSection) {
+                adminSection.innerHTML = `
+                    <div class="access-denied">
+                        <h3>⚠️ Akses Terbatas</h3>
+                        <p>Fitur ini hanya tersedia untuk Central Admin.</p>
+                        <p>Anda dapat mengelola anggota di cabang Anda saja.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function updateUserInterface() {
+            document.getElementById('adminName').textContent = currentUser.name;
+            document.getElementById('adminRole').textContent = currentUser.role;
+            document.getElementById('adminAvatar').textContent = currentUserRole === 'central' ? '👨‍💼' : '👨‍⚕️';
+        }
+
+        function setupEventListeners() {
+            // Navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (this.dataset.section) {
+                        e.preventDefault();
+                        showSection(this.dataset.section);
+                        
+                        // Update active nav
+                        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            // Search functionality
+            document.getElementById('memberSearch')?.addEventListener('input', filterMembers);
+            document.getElementById('adminSearch')?.addEventListener('input', filterAdmins);
+
+            // Form submissions
+            document.getElementById('addMemberForm')?.addEventListener('submit', handleAddMember);
+            document.getElementById('addAdminForm')?.addEventListener('submit', handleAddAdmin);
+        }
+
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show selected section
+            const targetSection = document.getElementById(`${sectionName}-section`);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+            }
+
+            // Update page title
+            const titles = {
+                'dashboard': 'Dashboard Admin PDPI',
+                'members': 'Manajemen Anggota',
+                'admin-management': 'Manajemen Admin Cabang',
+                'reports': 'Laporan dan Statistik',
+                'settings': 'Pengaturan Sistem'
+            };
+            document.getElementById('pageTitle').textContent = titles[sectionName] || 'Dashboard Admin PDPI';
+        }
+
+        function loadDashboardData() {
+            // Simulate loading dashboard statistics
+            if (currentUserRole === 'branch') {
+                // Branch admin sees only their branch data
+                document.getElementById('totalMembersAdmin').textContent = '123';
+                document.getElementById('activeMembersAdmin').textContent = '118';
+                document.getElementById('branchAdminsCount').textContent = '1';
+                document.getElementById('branchesCount').textContent = '1';
+            } else {
+                // Central admin sees all data
+                animateCounter('totalMembersAdmin', 2847);
+                animateCounter('activeMembersAdmin', 2634);
+                animateCounter('branchAdminsCount', 34);
+                animateCounter('branchesCount', 34);
+            }
+        }
+
+        function animateCounter(elementId, targetValue) {
+            const element = document.getElementById(elementId);
+            const startValue = 0;
+            const duration = 1500;
+            const increment = targetValue / (duration / 16);
+            let currentValue = startValue;
+
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= targetValue) {
+                    element.textContent = targetValue.toLocaleString('id-ID');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(currentValue).toLocaleString('id-ID');
+                }
+            }, 16);
+        }
+
+        // Modal Functions
+        function openAddMemberModal() {
+            document.getElementById('addMemberModal').style.display = 'block';
+        }
+
+        function openAddAdminModal() {
+            if (currentUserRole !== 'central') {
+                showNotification('Hanya Central Admin yang dapat menambah admin cabang!', 'error');
+                return;
+            }
+            document.getElementById('addAdminModal').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function showProfile() {
+            document.getElementById('profileModal').style.display = 'block';
+        }
+
+        // Member Management Functions
+        function handleAddMember(e) {
+            e.preventDefault();
+            // Simulate adding member
+            showNotification('Anggota berhasil ditambahkan!', 'success');
+            closeModal('addMemberModal');
+            
+            // In real app, this would send data to server
+            setTimeout(() => {
+                loadMembersData();
+            }, 500);
+        }
+
+        function handleAddAdmin(e) {
+            e.preventDefault();
+            if (currentUserRole !== 'central') {
+                showNotification('Akses ditolak! Hanya Central Admin yang dapat menambah admin cabang.', 'error');
+                return;
+            }
+            
+            showNotification('Admin cabang berhasil ditambahkan!', 'success');
+            closeModal('addAdminModal');
+            
+            setTimeout(() => {
+                loadAdminsData();
+            }, 500);
+        }
+
+        function viewMember(npa) {
+            alert(`Melihat detail anggota: ${npa}`);
+        }
+
+        function editMember(npa) {
+            alert(`Edit anggota: ${npa}`);
+        }
+
+        function deleteMember(npa) {
+            if (confirm(`Apakah Anda yakin ingin menghapus anggota ${npa}?`)) {
+                showNotification('Anggota berhasil dihapus!', 'success');
+            }
+        }
+
+        function editAdmin(username) {
+            if (currentUserRole !== 'central') {
+                showNotification('Akses ditolak! Hanya Central Admin yang dapat mengedit admin cabang.', 'error');
+                return;
+            }
+            alert(`Edit admin: ${username}`);
+        }
+
+        function resetPassword(username) {
+            if (currentUserRole !== 'central') {
+                showNotification('Akses ditolak!', 'error');
+                return;
+            }
+            if (confirm(`Reset password untuk ${username}?`)) {
+                showNotification('Password berhasil direset!', 'success');
+            }
+        }
+
+        function deactivateAdmin(username) {
+            if (currentUserRole !== 'central') {
+                showNotification('Akses ditolak!', 'error');
+                return;
+            }
+            if (confirm(`Nonaktifkan admin ${username}?`)) {
+                showNotification('Admin berhasil dinonaktifkan!', 'success');
+            }
+        }
+
+        // Filter Functions
+        function filterMembers() {
+            const searchTerm = document.getElementById('memberSearch').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            const branchFilter = document.getElementById('branchFilter').value;
+            
+            // In real app, this would filter the table rows
+            console.log('Filtering members:', { searchTerm, statusFilter, branchFilter });
+        }
+
+        function filterAdmins() {
+            const searchTerm = document.getElementById('adminSearch').value.toLowerCase();
+            const branchFilter = document.getElementById('adminBranchFilter').value;
+            
+            console.log('Filtering admins:', { searchTerm, branchFilter });
+        }
+
+        // Report Functions
+        function generateReport() {
+            const reportType = document.getElementById('reportType').value;
+            const reportPeriod = document.getElementById('reportPeriod').value;
+            
+            showNotification('Generating report...', 'success');
+            
+            // Simulate report generation
+            setTimeout(() => {
+                document.getElementById('reportResults').style.display = 'block';
+                showNotification('Laporan berhasil dibuat!', 'success');
+            }, 2000);
+        }
+
+        function exportReport() {
+            showNotification('Exporting to Excel...', 'success');
+            
+            // Simulate export
+            setTimeout(() => {
+                showNotification('File Excel berhasil diunduh!', 'success');
+            }, 1500);
+        }
+
+        // Utility Functions
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                showNotification('Logging out...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'index.html'; // Redirect to homepage
+                }, 1000);
+            }
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Simulate real-time updates
+        setInterval(() => {
+            const activityLog = document.getElementById('activityLog');
+            if (activityLog && Math.random() > 0.7) {
+                const activities = [
+                    'Menambah anggota baru',
+                    'Update data anggota',
+                    'Export laporan',
+                    'Login sistem',
+                    'Backup data'
+                ];
+                
+                const adminNames = currentUserRole === 'central' 
+                    ? ['Admin Riau', 'Admin Jakarta', 'Admin Bali', 'Central Admin']
+                    : [`Admin ${currentBranch.charAt(0).toUpperCase() + currentBranch.slice(1)}`];
+                
+                const newActivity = `
+                    <tr>
+                        <td>${new Date().toLocaleString('id-ID')}</td>
+                        <td>${activities[Math.floor(Math.random() * activities.length)]}</td>
+                        <td>${adminNames[Math.floor(Math.random() * adminNames.length)]}</td>
+                        <td><span style="color: #4caf50;">✓ Berhasil</span></td>
+                    </tr>
+                `;
+                
+                activityLog.insertAdjacentHTML('afterbegin', newActivity);
+                
+                // Keep only last 10 activities
+                while (activityLog.children.length > 10) {
+                    activityLog.removeChild(activityLog.lastChild);
+                }
+            }
+        }, 15000);
+    </script>
+</body>
+</html>
